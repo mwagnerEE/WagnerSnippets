@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Cached Get NonPublic Property</Title>
+            <Shortcut>nppropget</Shortcut>
+            <Description>Gets a NonPublic Property using cached reflection. Adapted from Nick Chapsas's "Achieving compile-time performance with Reflection in C#"</Description>
+            <Author>Mike Wagner</Author>
+            <SnippetTypes>
+                <SnippetType>Expansion</SnippetType>
+            </SnippetTypes>
+        </Header>
+        <Snippet>
+            <Declarations>
+				<Literal>
+                    <ID>class</ID>
+                    <ToolTip>Class</ToolTip>
+                    <Default>TClass</Default>
+                </Literal>
+                <Literal>
+                    <ID>propertytype</ID>
+                    <ToolTip>Property Type</ToolTip>
+                    <Default>TProperty</Default>
+                </Literal>
+                <Literal>
+                    <ID>propertyname</ID>
+                    <ToolTip>Property Name</ToolTip>
+                    <Default>PropertyName</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="csharp">
+                <![CDATA[
+
+private static readonly PropertyInfo Cached$propertyname$PropertyInfo = typeof($propertytype$).GetProperty("$propertyname$", BindingFlags.NonPublic | BindingFlags.Instance);
+private static readonly Func<$class$, $propertytype$> Get$propertyname$Delegate = (Func<$class$, $propertytype$>)Delegate.CreateDelegate(typeof(Func<$class$, $propertytype$>), Cached$propertyname$PropertyInfo.GetGetMethod(true));
+public static $propertytype$ Get$propertyname$($class$ instance)
+{
+	return Get$propertyname$Delegate(instance);
+}
+
+$end$]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
