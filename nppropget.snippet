@@ -31,7 +31,7 @@
             <Code Language="csharp">
                 <![CDATA[
 
-private static readonly PropertyInfo Cached$propertyname$PropertyInfo = typeof($propertytype$).GetProperty("$propertyname$", BindingFlags.NonPublic | BindingFlags.Instance);
+private static readonly PropertyInfo Cached$propertyname$PropertyInfo = typeof($class$).GetProperty("$propertyname$", BindingFlags.NonPublic | BindingFlags.Instance);
 private static readonly Func<$class$, $propertytype$> Get$propertyname$Delegate = (Func<$class$, $propertytype$>)Delegate.CreateDelegate(typeof(Func<$class$, $propertytype$>), Cached$propertyname$PropertyInfo.GetGetMethod(true));
 public static $propertytype$ Get$propertyname$($class$ instance)
 {
